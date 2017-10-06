@@ -23,9 +23,10 @@ io.on('connection', (socket) => {
 
   // Server listens for a create message event from the client
   // and emits that message event back to the users
-  socket.on('createMessage', (message) => {
+  socket.on('createMessage', (message, callback) => {
     console.log('createMessage', message);
     io.emit('newMessage', generateMessage(message.from, message.text));
+    callback('This is from the server');
   });
 
   socket.on('disconnect', () => {
