@@ -22,7 +22,7 @@ io.on('connection', (socket) => {
   // Server listens for a join event
   socket.on('join', (params, callback) => {
     // Check if login params are empty or invalid
-    if (!isRealString(params.name) || !isRealString(params.room)) {
+    if (!isRealString(params.name)) {
       return callback('Name and room name are required.');
     }
 
