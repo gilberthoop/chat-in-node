@@ -46,8 +46,13 @@ io.on('connection', (socket) => {
    * and emits that message event back to all users
    */
   socket.on('createMessage', (message, callback) => {
-    console.log('createMessage', message);
-    io.emit('newMessage', generateMessage(message.from, message.text));
+    var user = users.getUser(socket.id);
+    
+    // Check if the user exists and if the message is not empty
+    if (user && isRealString(message.text)) {
+      io.to(user.room).emit('newMessage', generateMessage(user.name, message.text));
+    } 
+    
     callback();
   });
 
@@ -56,7 +61,12 @@ io.on('connection', (socket) => {
    * Emits the location to all users
    */
   socket.on('createLocationMessage', (coords) => {
-    io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
+    var user = users.getUser(socket.id);
+
+    // Check if the user exists
+    if (user) {
+      io.to(user.room).emit('newLocationMessage', generateLocationMessage(user.name, coords.latitude, coords.longitude));
+    }
   });
 
   /*
