@@ -161,3 +161,6 @@ button:disabled {
         margin-right: 0
     }
 }
+#copyright { 
+    text-align: center; 
+}
