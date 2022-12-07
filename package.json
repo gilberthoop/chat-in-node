@@ -11,7 +11,7 @@
   "author": "William Gilbert Go",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.1",
+    "express": "^4.18.2",
     "moment": "^2.18.1",
     "socket.io": "^2.0.3"
   },
